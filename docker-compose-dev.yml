@@ -1,7 +1,33 @@
 version: "3.7"
 services:
-  dev_db:
+  dev_front:
+    build:
+      context: .
+      dockerfile: Dockerfile-front.dev
+    container_name: dev_front
+    ports: 
+      - 3000:3000
+    volumes: 
+      - /webapp/node_modules
+      - ./webapp:/webapp
+    depends_on: 
+      - dev_back
+
+  dev_back:
+    build:
+      context: .
+      dockerfile: Dockerfile-back.dev
+    container_name: dev_back
+    ports: 
+      - 8080:8080
+    depends_on: 
+      - db
+    environment: 
+      profile: prod
+
+  db:
     image: mongo:4.2.3
+    container_name: db
     environment:
       MONGO_INITDB_DATABASE: tech
     ports:

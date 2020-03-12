@@ -1,0 +1,6 @@
+FROM node:12.16
+WORKDIR '/webapp'
+COPY webapp/package.json .
+RUN npm install
+COPY webapp .
+CMD [ "npm", "run", "start" ]

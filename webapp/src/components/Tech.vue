@@ -1,5 +1,6 @@
 <template>
   <ul class="technologies">
+    <h3>tech</h3>
     <li v-for="technology in technologies" v-bind:key="technology.name">
       <b>{{technology.name}}</b>: {{technology.details}}
     </li>
